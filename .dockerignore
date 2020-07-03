@@ -1,0 +1,15 @@
+*
+
+!public
+!src
+!package-lock.json
+!package.json
+!.eslintrc.js
+!jest.config.js
+!cypress.json
+!babel.config.js
+!.env.production
+!.env.development
+!tailwind.config.js
+#this is for kaniko to build correctly the docker image
+!/app/dist
