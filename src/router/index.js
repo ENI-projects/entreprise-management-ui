@@ -1,14 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Unauthorized from "@/views/Unauthorized.vue";
 
 Vue.use(VueRouter);
+
+const checkAccessRights = (to, from, next) => {
+  if (
+    Vue.prototype.$keycloak.authenticated &&
+    Vue.prototype.$keycloak.tokenParsed.resource_access[
+      "entreprise-management-ui"
+    ]
+  ) {
+    next();
+  } else {
+    next({ path: "/unauthorized" });
+  }
+};
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    beforeEnter: checkAccessRights
   },
   {
     path: "/about",
@@ -17,11 +32,18 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    beforeEnter: checkAccessRights
+  },
+  {
+    path: "/unauthorized",
+    name: "Unauthorized",
+    component: Unauthorized
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 
