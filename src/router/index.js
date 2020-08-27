@@ -23,7 +23,10 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-    beforeEnter: checkAccessRights
+    beforeEnter: checkAccessRights,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: "/about",
@@ -33,12 +36,18 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-    beforeEnter: checkAccessRights
+    beforeEnter: checkAccessRights,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: "/unauthorized",
     name: "Unauthorized",
-    component: Unauthorized
+    component: Unauthorized,
+    meta: {
+      requireAuth: false
+    }
   }
 ];
 

@@ -22,8 +22,8 @@ Vue.use(VueKeyCloak, {
   onReady: keycloak => {
     store.dispatch(ACTIONS.UPDATE_TOKEN, keycloak.token);
     new Vue({
-      router: router,
-      store: store,
+      router,
+      store,
       render: h => h(App)
     }).$mount("#app");
   }
