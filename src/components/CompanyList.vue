@@ -4,6 +4,7 @@
       v-for="(companyElement, index) in companies"
       :key="index"
       :name="companyElement.nom"
+      :id="companyElement.id"
       class="border-b-2 border-gray-400"
     />
   </div>

@@ -3,10 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueKeyCloak from "@dsb-norge/vue-keycloak-js";
+import VModal from "vue-js-modal";
 import { ACTIONS } from "@/store/actions-definitions";
 
 Vue.config.productionTip = false;
-
+Vue.use(VModal);
 Vue.use(VueKeyCloak, {
   config: {
     authRealm: process.env.VUE_APP_KEYCLOAK_REALM,

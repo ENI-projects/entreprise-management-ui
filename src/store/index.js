@@ -10,7 +10,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: "",
-    companies: []
+    companies: [],
+    focusedCompany: {}
   },
   mutations: {
     [MUTATIONS.UPDATE_TOKEN]: (state, token) => {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     [MUTATIONS.UPDATE_COMPANIES]: (state, companies) => {
       state.companies = companies;
+    },
+    [MUTATIONS.UPDATE_FOCUSED_COMPANY]: (state, company) => {
+      state.focusedCompany = company;
     }
   },
   actions: {
@@ -32,6 +36,17 @@ export default new Vuex.Store({
       );
       const companies = companiesQueryResult.data.armadacar_entreprises;
       context.commit(MUTATIONS.UPDATE_COMPANIES, companies);
+    },
+    async [ACTIONS.GET_FOCUSED_COMPANY](context, id) {
+      const companyDetailsQueryResult = await fetchAsync(
+        context.state.token,
+        fetcher,
+        queries.getEntrepriseById,
+        { id }
+      );
+      const companyDetails =
+        companyDetailsQueryResult.data.armadacar_entreprises[0];
+      context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, companyDetails);
     }
   },
   modules: {}
