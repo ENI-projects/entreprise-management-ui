@@ -7,7 +7,7 @@
       <button @click="showDetails">
         <img
           class="h-6 w-6 py-auto my-auto justify-end"
-          src="@/assets/img/modify-icon.svg"
+          src="@/assets/img/modify-alt-icon.svg"
         />
       </button>
       <button>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CompanyDetail from "@/components/CompanyDetail.vue";
+import CompanyDetail from "@/views/CompanyDetail.vue";
 
 export default {
   name: "CompanyListElement",
@@ -31,7 +31,7 @@ export default {
       this.$modal.show(
         CompanyDetail,
         { companyId: this.id },
-        { height: 500, minHeight: 500 }
+        { height: 530, minHeight: 530 }
       );
     }
   }

@@ -8,6 +8,7 @@
       type="text"
       :disabled="disabled"
       :value="value"
+      v-on:input="$emit('input', $event.target.value)"
     />
   </div>
 </template>

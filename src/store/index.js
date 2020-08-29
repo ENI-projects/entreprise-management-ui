@@ -4,6 +4,7 @@ import { ACTIONS } from "./actions-definitions";
 import { MUTATIONS } from "./mutations-definitions";
 import { fetchAsync, fetcher } from "@/api/fetcher.js";
 import { queries } from "@/api/queries.js";
+import { mutations } from "../api/mutations";
 
 Vue.use(Vuex);
 
@@ -47,6 +48,22 @@ export default new Vuex.Store({
       const companyDetails =
         companyDetailsQueryResult.data.armadacar_entreprises[0];
       context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, companyDetails);
+    },
+    async [ACTIONS.COMMIT_FOCUSED_COMPANY](context) {
+      await fetchAsync(
+        context.state.token,
+        fetcher,
+        mutations.updateCompanyById,
+        {
+          id: context.state.focusedCompany.id,
+          nom: context.state.focusedCompany.nom,
+          adresse: context.state.focusedCompany.adresse,
+          ville: context.state.focusedCompany.ville,
+          departement: context.state.focusedCompany.departement,
+          code_postal: context.state.focusedCompany.code_postal,
+          responsable: context.state.focusedCompany.responsable
+        }
+      );
     }
   },
   modules: {}
