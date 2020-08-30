@@ -49,7 +49,7 @@ export default new Vuex.Store({
         companyDetailsQueryResult.data.armadacar_entreprises[0];
       context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, companyDetails);
     },
-    async [ACTIONS.COMMIT_FOCUSED_COMPANY](context) {
+    async [ACTIONS.COMMIT_FOCUSED_COMPANY_UPDATE](context) {
       await fetchAsync(
         context.state.token,
         fetcher,
@@ -64,6 +64,19 @@ export default new Vuex.Store({
           responsable: context.state.focusedCompany.responsable
         }
       );
+    },
+    async [ACTIONS.COMMIT_FOCUSED_COMPANY_INSERT](context) {
+      await fetchAsync(context.state.token, fetcher, mutations.addCompany, {
+        nom: context.state.focusedCompany.nom,
+        adresse: context.state.focusedCompany.adresse,
+        ville: context.state.focusedCompany.ville,
+        departement: context.state.focusedCompany.departement,
+        code_postal: context.state.focusedCompany.code_postal,
+        responsable: context.state.focusedCompany.responsable
+      });
+    },
+    [ACTIONS.RESET_FOCUSED_COMPANY](context) {
+      context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, {});
     }
   },
   modules: {}

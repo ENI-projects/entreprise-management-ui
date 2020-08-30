@@ -1,7 +1,7 @@
 <template>
   <div>
     <CompanyListElement
-      v-for="(companyElement, index) in companies"
+      v-for="(companyElement, index) in value"
       :key="index"
       :name="companyElement.nom"
       :id="companyElement.id"
@@ -14,7 +14,7 @@
 import CompanyListElement from "@/components/CompanyListElement";
 export default {
   name: "CompanyList",
-  props: ["companies"],
+  props: ["value"],
   components: {
     CompanyListElement
   }

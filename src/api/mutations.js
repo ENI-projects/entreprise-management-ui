@@ -21,5 +21,20 @@ export const mutations = {
         ville
       }
     }
+  }`,
+  addCompany: `mutation addCompany($nom: String!, $adresse: String!, $ville: String!, $departement: String!, $code_postal: String!, $responsable: String!) {
+    insert_armadacar_entreprises(objects: {
+      nom: $nom,
+      adresse: $adresse,
+      ville: $ville,
+      departement: $departement,
+      code_postal: $code_postal,
+      responsable: $responsable
+    }
+    ) {
+      returning {
+        id
+      }
+    }
   }`
 };
