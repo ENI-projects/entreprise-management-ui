@@ -36,5 +36,10 @@ export const mutations = {
         id
       }
     }
+  }`,
+  deleteCompanyById: `mutation deleteCompanyById($id: Int!) {
+    delete_armadacar_entreprises(where: {id: {_eq: $id}}) {
+      affected_rows
+    }
   }`
 };

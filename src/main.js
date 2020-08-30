@@ -8,7 +8,7 @@ import Vuelidate from "vuelidate";
 import { ACTIONS } from "@/store/actions-definitions";
 
 Vue.config.productionTip = false;
-Vue.use(VModal);
+Vue.use(VModal, { dialog: true });
 Vue.use(Vuelidate);
 Vue.use(VueKeyCloak, {
   config: {

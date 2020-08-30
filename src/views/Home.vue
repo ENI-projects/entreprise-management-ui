@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="flex-col border-r border-l border-black border-solid mx-48">
-      <CompanyList v-model="companies" />
+      <CompanyList :companies="companies" />
     </div>
   </div>
 </template>

@@ -77,6 +77,14 @@ export default new Vuex.Store({
     },
     [ACTIONS.RESET_FOCUSED_COMPANY](context) {
       context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, {});
+    },
+    async [ACTIONS.DELETE_COMPANY](context, id) {
+      await fetchAsync(
+        context.state.token,
+        fetcher,
+        mutations.deleteCompanyById,
+        { id }
+      );
     }
   },
   modules: {}

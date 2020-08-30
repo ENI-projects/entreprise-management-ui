@@ -4,5 +4,6 @@ export const ACTIONS = {
   GET_FOCUSED_COMPANY: "getFocusedCompany",
   COMMIT_FOCUSED_COMPANY_UPDATE: "updateCompany",
   RESET_FOCUSED_COMPANY: "resetFocusedCompany",
-  COMMIT_FOCUSED_COMPANY_INSERT: "insertCompany"
+  COMMIT_FOCUSED_COMPANY_INSERT: "insertCompany",
+  DELETE_COMPANY: "deleteCompany"
 };
