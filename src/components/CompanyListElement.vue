@@ -55,7 +55,6 @@ export default {
             title: "Confirmer",
             handler: () => {
               this[ACTIONS.DELETE_COMPANY](this.id);
-              this[ACTIONS.RETRIEVE_COMPANIES];
               this.$modal.hide("dialog");
             }
           }

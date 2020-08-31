@@ -23,6 +23,11 @@ export default new Vuex.Store({
     },
     [MUTATIONS.UPDATE_FOCUSED_COMPANY]: (state, company) => {
       state.focusedCompany = company;
+    },
+    [MUTATIONS.UPDATE_COMPANY_IN_LIST]: (state, updatedCompany) => {
+      state.companies.find(company => {
+        return company.id == updatedCompany.id;
+      }).nom = updatedCompany.nom;
     }
   },
   actions: {
@@ -50,40 +55,65 @@ export default new Vuex.Store({
       context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, companyDetails);
     },
     async [ACTIONS.COMMIT_FOCUSED_COMPANY_UPDATE](context) {
-      await fetchAsync(
-        context.state.token,
-        fetcher,
-        mutations.updateCompanyById,
-        {
-          id: context.state.focusedCompany.id,
-          nom: context.state.focusedCompany.nom,
-          adresse: context.state.focusedCompany.adresse,
-          ville: context.state.focusedCompany.ville,
-          departement: context.state.focusedCompany.departement,
-          code_postal: context.state.focusedCompany.code_postal,
-          responsable: context.state.focusedCompany.responsable
-        }
-      );
+      let defaultValues = {
+        nom: "",
+        adresse: "",
+        ville: "",
+        departement: "",
+        code_postal: "",
+        responsable: ""
+      };
+      const updatedCompany = (
+        await fetchAsync(
+          context.state.token,
+          fetcher,
+          mutations.updateCompanyById,
+          {
+            ...defaultValues,
+            ...context.state.focusedCompany
+          }
+        )
+      ).data.update_armadacar_entreprises.returning[0];
+      context.commit(MUTATIONS.UPDATE_COMPANY_IN_LIST, updatedCompany);
     },
     async [ACTIONS.COMMIT_FOCUSED_COMPANY_INSERT](context) {
-      await fetchAsync(context.state.token, fetcher, mutations.addCompany, {
-        nom: context.state.focusedCompany.nom,
-        adresse: context.state.focusedCompany.adresse,
-        ville: context.state.focusedCompany.ville,
-        departement: context.state.focusedCompany.departement,
-        code_postal: context.state.focusedCompany.code_postal,
-        responsable: context.state.focusedCompany.responsable
-      });
+      let defaultValues = {
+        nom: "",
+        adresse: "",
+        ville: "",
+        departement: "",
+        code_postal: "",
+        responsable: ""
+      };
+      const companyInserted = (
+        await fetchAsync(context.state.token, fetcher, mutations.addCompany, {
+          ...defaultValues,
+          ...context.state.focusedCompany
+        })
+      ).data.insert_armadacar_entreprises.returning[0];
+      context.commit(MUTATIONS.UPDATE_COMPANIES, [
+        companyInserted,
+        ...context.state.companies
+      ]);
     },
     [ACTIONS.RESET_FOCUSED_COMPANY](context) {
       context.commit(MUTATIONS.UPDATE_FOCUSED_COMPANY, {});
     },
     async [ACTIONS.DELETE_COMPANY](context, id) {
-      await fetchAsync(
+      const deletedCompany = await fetchAsync(
         context.state.token,
         fetcher,
         mutations.deleteCompanyById,
         { id }
+      );
+      context.commit(
+        MUTATIONS.UPDATE_COMPANIES,
+        context.state.companies.filter(company => {
+          return (
+            company.id !==
+            deletedCompany.data.delete_armadacar_entreprises.returning[0].id
+          );
+        })
       );
     }
   },

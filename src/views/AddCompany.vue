@@ -64,12 +64,10 @@ export default {
   methods: {
     ...mapActions([
       ACTIONS.RESET_FOCUSED_COMPANY,
-      ACTIONS.COMMIT_FOCUSED_COMPANY_INSERT,
-      ACTIONS.RETRIEVE_COMPANIES
+      ACTIONS.COMMIT_FOCUSED_COMPANY_INSERT
     ]),
     async addCompany() {
       this[ACTIONS.COMMIT_FOCUSED_COMPANY_INSERT]();
-      this[ACTIONS.RETRIEVE_COMPANIES]();
       this.$modal.hide("addCompanyModal");
     }
   },

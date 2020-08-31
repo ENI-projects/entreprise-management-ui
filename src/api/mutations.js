@@ -12,13 +12,8 @@ export const mutations = {
       }
     ) {
       returning {
-        adresse
-        code_postal
-        departement
         id
         nom
-        responsable
-        ville
       }
     }
   }`,
@@ -34,12 +29,15 @@ export const mutations = {
     ) {
       returning {
         id
+        nom
       }
     }
   }`,
   deleteCompanyById: `mutation deleteCompanyById($id: Int!) {
     delete_armadacar_entreprises(where: {id: {_eq: $id}}) {
-      affected_rows
+      returning {
+        id
+      }
     }
   }`
 };

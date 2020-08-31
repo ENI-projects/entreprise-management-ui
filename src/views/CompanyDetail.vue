@@ -84,12 +84,10 @@ export default {
   methods: {
     ...mapActions([
       ACTIONS.GET_FOCUSED_COMPANY,
-      ACTIONS.COMMIT_FOCUSED_COMPANY,
-      ACTIONS.RETRIEVE_COMPANIES
+      ACTIONS.COMMIT_FOCUSED_COMPANY
     ]),
     async updateCompany() {
       this.$store.dispatch(ACTIONS.COMMIT_FOCUSED_COMPANY_UPDATE);
-      this.$store.dispatch(ACTIONS.RETRIEVE_COMPANIES);
       this.disabled = !this.disabled;
     }
   },
