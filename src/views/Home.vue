@@ -37,7 +37,7 @@ export default {
       this.$modal.show(
         AddCompany,
         {},
-        { name: "addCompanyModal", height: 460 }
+        { name: "addCompanyModal", height: 600, width: 800 }
       );
     }
   },

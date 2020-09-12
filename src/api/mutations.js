@@ -39,5 +39,19 @@ export const mutations = {
         id
       }
     }
+  }`,
+  deleteCompanyRelatedStuffById: `mutation deleteCompanyRelatedStuffById($id: Int!) {
+    delete_armadacar_utilisateurs_courses(where: {course: {entreprise: {id: {_eq: $id}}}}) {
+      affected_rows
+    }
+    delete_armadacar_courses(where: {entreprise: {id: {_eq: $id}}}) {
+      affected_rows
+    }
+    delete_armadacar_voitures(where: {entreprise: {id: {_eq: $id}}}) {
+      affected_rows
+    }
+    delete_armadacar_lieux_de_stockage(where: {entreprise: {id: {_eq: $id}}}) {
+      affected_rows
+    }
   }`
 };

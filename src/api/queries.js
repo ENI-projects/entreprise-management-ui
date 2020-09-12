@@ -3,6 +3,7 @@ export const queries = {
     armadacar_entreprises {
       nom
       id
+      responsable
     }
   }`,
   getEntrepriseById: `query getEntrepriseById ($id: Int!) {
@@ -14,6 +15,11 @@ export const queries = {
       nom
       responsable
       ville
+    }
+  }`,
+  getUsersIdByIdEntreprise: `query getUsersIdByIdEntreprise($id: Int!) {
+    armadacar_utilisateurs(where: {entreprise: {id: {_eq: $id}}}) {
+      id
     }
   }`
 };

@@ -1,38 +1,78 @@
 <template>
   <div>
-    <form class="w-full pt-5 px-5">
-      <!-- form elements -->
-      <CompanyDetailFormElement
-        label="Nom"
-        v-model="focusedCompany.nom"
-        :disabled="disabled"
-      />
-      <CompanyDetailFormElement
-        label="Adresse"
-        :disabled="disabled"
-        v-model="focusedCompany.adresse"
-      />
-      <CompanyDetailFormElement
-        label="Ville"
-        :disabled="disabled"
-        v-model="focusedCompany.ville"
-      />
-      <CompanyDetailFormElement
-        label="Département"
-        :disabled="disabled"
-        v-model="focusedCompany.departement"
-      />
-      <CompanyDetailFormElement
-        label="Code Postal"
-        :disabled="disabled"
-        v-model="focusedCompany.code_postal"
-      />
-      <CompanyDetailFormElement
-        label="Responsable"
-        :disabled="disabled"
-        v-model="focusedCompany.responsable"
-      />
-    </form>
+    <div class="flex flex-row">
+      <div class="w-1/2 pt-5 px-5">
+        <span class="flex text-gray-700 font-bold mb-1 mb-5 justify-center">
+          Entreprise
+        </span>
+        <!-- form elements -->
+        <CompanyDetailFormElement
+          label="Nom"
+          v-model="focusedCompany.nom"
+          :disabled="disabled"
+        />
+        <CompanyDetailFormElement
+          label="Adresse"
+          :disabled="disabled"
+          v-model="focusedCompany.adresse"
+        />
+        <CompanyDetailFormElement
+          label="Ville"
+          :disabled="disabled"
+          v-model="focusedCompany.ville"
+        />
+        <CompanyDetailFormElement
+          label="Département"
+          :disabled="disabled"
+          v-model="focusedCompany.departement"
+        />
+        <CompanyDetailFormElement
+          label="Code Postal"
+          :disabled="disabled"
+          v-model="focusedCompany.code_postal"
+        />
+      </div>
+      <div class="w-1/2 pt-5 px-5">
+        <span class="flex text-gray-700 font-bold mb-1 mb-5 justify-center">
+          Responsable
+        </span>
+        <CompanyDetailFormElement
+          label="Email"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.email"
+        />
+        <CompanyDetailFormElement
+          label="Nom"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.last_name"
+        />
+        <CompanyDetailFormElement
+          label="Prénom"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.first_name"
+        />
+        <CompanyDetailFormElement
+          label="Adresse"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.address"
+        />
+        <CompanyDetailFormElement
+          label="Ville"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.ville"
+        />
+        <CompanyDetailFormElement
+          label="Code Postal"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.code_postal"
+        />
+        <CompanyDetailFormElement
+          label="Téléphone"
+          :disabled="disabled"
+          v-model="focusedCompanyResponsable.phone"
+        />
+      </div>
+    </div>
     <!-- different render of the validate button when in modify state or not -->
     <div class="flex justify-end flex-grow pr-8 my-2">
       <button
@@ -72,7 +112,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["focusedCompany"])
+    ...mapState(["focusedCompany", "focusedCompanyResponsable"])
   },
   mounted() {
     this[ACTIONS.RESET_FOCUSED_COMPANY]();

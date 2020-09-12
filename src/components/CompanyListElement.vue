@@ -29,12 +29,12 @@ export default {
   name: "CompanyListElement",
   props: ["name", "id"],
   methods: {
-    ...mapActions([ACTIONS.DELETE_COMPANY, ACTIONS.RETRIEVE_COMPANIES]),
+    ...mapActions([ACTIONS.DELETE_COMPANY]),
     showDetails() {
       this.$modal.show(
         CompanyDetail,
         { companyId: this.id },
-        { height: 530, minHeight: 530 }
+        { height: 650, width: 800 }
       );
     },
     confirmDeletion() {

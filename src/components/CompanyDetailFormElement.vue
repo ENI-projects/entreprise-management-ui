@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center mb-6">
-    <div class="block w-4/12 text-gray-500 font-bold mb-1 md:mb-0 pr-4">
+    <div class="block w-6/12 text-gray-500 font-bold mb-1 md:mb-0 pr-4">
       {{ label }}
     </div>
     <input
